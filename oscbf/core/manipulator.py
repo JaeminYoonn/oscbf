@@ -761,6 +761,21 @@ def load_panda() -> Manipulator:
     )
 
 
+def load_fr3() -> Manipulator:
+    """Create a Manipulator object for the Franka Research 3"""
+
+    return Manipulator.from_urdf(
+        "oscbf/assets/franka_fr3/fr3.urdf",
+        ee_offset=np.block(
+            [
+                [np.eye(3), np.reshape(np.array([0.0, 0.0, 0.216]), (-1, 1))],
+                [0.0, 0.0, 0.0, 1.0],
+            ]
+        ),
+        collision_data=franka_collision_data,
+    )
+
+
 def main():
     # Quick validation that the manipulator class works
     robot = load_panda()
